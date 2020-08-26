@@ -1,7 +1,6 @@
 import os
 from twilio.rest import Client
-import json
-from selenium import webdriver
+import requests
 import datetime, pytz
 
 # Extension for rain identification
@@ -36,11 +35,9 @@ def convertToReadableTime(unix_time):
 
 
 # Make API call
-driver = webdriver.Chrome()
-driver.get(api_call)
-html = driver.find_element_by_xpath("//pre").text
-c = json.loads(html)
-driver.close()
+# Make API call
+html = requests.get(api_call)
+c = html.json()
 
 # Extract Data #
 
